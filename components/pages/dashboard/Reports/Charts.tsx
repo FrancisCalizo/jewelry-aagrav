@@ -2,6 +2,8 @@ import React from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import faker from 'faker';
 import styled from 'styled-components';
+import { darken } from 'polished';
+import { TagCloud } from 'react-tagcloud';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,6 +28,33 @@ ChartJS.register(
 );
 
 const labels = ['October', 'Novemeber', 'Decemeber'];
+
+const cloudData = [
+  { value: '#jewelry', count: 10 },
+  { value: '#fineart', count: 18 },
+  { value: '#bespoke', count: 20 },
+  { value: '#gold', count: 18 },
+  { value: '#jewel', count: 28 },
+  { value: '#custom', count: 25 },
+  { value: '#silver', count: 33 },
+  { value: '#pendant', count: 20 },
+  { value: '#sapphire', count: 22 },
+  { value: '#ruby', count: 7 },
+  { value: '#diamond', count: 25 },
+  { value: '#intricate', count: 15 },
+  { value: '#vvs', count: 17 },
+  { value: '#handmade', count: 30 },
+  { value: '#metal', count: 11 },
+
+  { value: '#jewelry', count: 10 },
+  { value: '#fineart', count: 18 },
+  { value: '#gold', count: 18 },
+  { value: '#jewel', count: 28 },
+  { value: '#custom', count: 25 },
+  { value: '#silver', count: 33 },
+  { value: '#pendant', count: 20 },
+  { value: '#sapphire', count: 22 },
+];
 
 export default function Charts() {
   return (
@@ -114,7 +143,10 @@ export default function Charts() {
       </div>
 
       <div>
-        <h2 className="chart-title">Some MF Cloud here</h2>
+        <h2 className="chart-title">Hashtags</h2>
+        <CloudContainer>
+          <TagCloud tags={cloudData} minSize={1} maxSize={5} renderer={customRenderer} />
+        </CloudContainer>
       </div>
     </MainContainer>
   );
@@ -135,4 +167,34 @@ const MainContainer = styled.div`
     text-align: center;
     margin-bottom: 1.5rem;
   }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 `;
+
+const CloudContainer = styled.div`
+  border: 1px solid ${darken(0.2, 'gainsboro')};
+  padding: 4rem 3rem;
+  border-radius: 10px;
+`;
+
+const customRenderer = (tag: any, size: any, color: any) => (
+  <span
+    key={tag.value}
+    style={{
+      animation: 'blinker 3s linear infinite',
+      animationDelay: `${Math.random() * 4}s`,
+      fontSize: `${size / 2}em`,
+      border: `2px solid ${color}`,
+      margin: '3px',
+      padding: '3px',
+      display: 'inline-block',
+      color: 'black',
+    }}
+  >
+    {tag.value}
+  </span>
+);
