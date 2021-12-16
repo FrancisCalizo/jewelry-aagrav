@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
-import { darken } from 'polished';
+import { darken, rgba } from 'polished';
 
 import { footerRoutes } from 'components/utils/routes';
 
@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <BackgroundContainer>
       <MainContainer>
-        <Link href="/">
+        {/* <Link href="/">
           <a>
             <Image
               src={`/images/logo-4-white.png`}
@@ -20,16 +20,16 @@ export default function Footer() {
               quality={90}
             />
           </a>
-        </Link>
+        </Link> */}
 
         <ButtonContainer>
           {footerRoutes.map((route, key) => (
-            <Link key={key} href={route.path}>
+            <Link key={key} href={'#'}>
               <Button variant={route.title}>{route.title}</Button>
             </Link>
           ))}
         </ButtonContainer>
-        <p>@ Mount Tracker 2021 - All rights Reserved.</p>
+        <p>2021 - All rights Reserved.</p>
       </MainContainer>
     </BackgroundContainer>
   );
@@ -37,7 +37,7 @@ export default function Footer() {
 
 const BackgroundContainer = styled.div`
   background-color: ${(props) => props.theme.colors.dark};
-  border-top: 3px solid ${(props) => props.theme.colors.orange};
+  border-top: 3px solid ${(props) => props.theme.colors.silver};
 `;
 
 const MainContainer = styled.div`
@@ -45,6 +45,7 @@ const MainContainer = styled.div`
   margin: 0 auto;
   padding: 2rem;
   color: white;
+  min-height: 310px;
 
   text-align: center;
 
@@ -67,15 +68,15 @@ const MainContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   max-width: 280px;
-  margin: 1rem auto;
+  margin: 3rem auto 1rem;
 `;
 
 const Button = styled.button<{ variant: any }>`
   display: block;
   width: 100%;
   background: ${({ theme, variant }) =>
-    variant === 'About Us' ? theme.colors.orange : theme.colors.brown};
-  color: white;
+    variant === 'About Us' ? theme.colors.silver : rgba(0, 0, 0, 0.5)};
+  color: ${({ variant }) => (variant === 'About Us' ? '#000' : '#fff')};
   border: 0.5px solid white;
   padding: 0.75rem 1rem;
   border-radius: 6px;
@@ -88,7 +89,7 @@ const Button = styled.button<{ variant: any }>`
   &:hover {
     background: ${({ theme, variant }) =>
       variant === 'About Us'
-        ? darken(0.05, theme.colors.orange)
+        ? darken(0.05, theme.colors.silver)
         : darken(0.05, theme.colors.brown)};
     transform: scale(1.02);
   }

@@ -44,6 +44,7 @@ export const theme = {
     gold: '#CCB86B',
     brown: '#5B3F0C',
     orange: '#FF7221',
+    silver: '#C0C0C0',
   },
   button: {
     boxShadow: `0px 4px 4px rgba(0, 0, 0, 0.4)`,
