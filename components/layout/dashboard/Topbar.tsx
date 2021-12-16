@@ -9,7 +9,10 @@ import { Popover, PopoverState } from 'react-tiny-popover';
 import MobileSidebar from 'components/layout/dashboard/MobileSidebar';
 import UserDropdown from 'components/layout/dashboard/UserDropdown';
 
+import { useAuth } from 'components/AuthContext';
+
 export default function Topbar() {
+  const { user } = useAuth();
   const router = useRouter();
 
   // Popover was displaying odd console error on render
@@ -42,7 +45,7 @@ export default function Topbar() {
 
       <div className="right-section">
         <div>
-          <span className="user-name">John Smith</span>
+          <span className="user-name">{user || 'John Stamos'}</span>
           <p className="user-title">
             {userRole === 'hunter' && <>Hunter</>}
             {userRole === 'taxidermist' && <>Jeweler</>}

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { lighten } from 'polished';
 
 import SiteLayout from 'components/layout/SiteLayout';
+import { useAuth } from 'components/AuthContext';
 
 const credentials = [
   { username: 'jacobgci', password: 'GCI1935', name: 'Jacob' },
@@ -18,6 +19,7 @@ type FormValues = {
 };
 
 export default function TaxidermistLogin() {
+  const { setUser } = useAuth();
   const router = useRouter();
 
   const [isInvalid, setIsInvalid] = useState(false);
@@ -33,6 +35,7 @@ export default function TaxidermistLogin() {
 
     if (validatedUser) {
       if ((validatedUser.password = data.password)) {
+        setUser(validatedUser.name);
         setIsInvalid(false);
         router.push('/jeweler/dashboard');
       }
