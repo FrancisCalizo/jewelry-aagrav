@@ -37,11 +37,7 @@ export default function Sidebar() {
         {TAXIDERMIST_LINKS.map((link: { title: string; url: string; icon: any }, key: number) => (
           <GLink
             key={key}
-            href={
-              key === 0
-                ? '/taxidermist/dashboard'
-                : `/taxidermist/dashboard/${link.url.toLowerCase()}`
-            }
+            href={key === 0 ? '/jeweler/dashboard' : `/jeweler/dashboard/${link.url.toLowerCase()}`}
           >
             <Li
               isCurrent={

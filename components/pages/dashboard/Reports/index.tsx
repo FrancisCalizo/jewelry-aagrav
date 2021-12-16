@@ -1,8 +1,10 @@
 import { formatCurrency } from 'components/utils';
 import React from 'react';
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 import Charts from 'components/pages/dashboard/Reports/Charts';
+import { theme } from 'components/Theme';
 
 export default function Reports() {
   return (
@@ -17,7 +19,7 @@ export default function Reports() {
         {FAKE_REPORT_TOTALS.map((report, key) => (
           <TotalsCard key={key}>
             <h4 className="card-title">{report.totalsTitle}</h4>
-            <h4 className="card-statistic">{formatCurrency(report.totalsAmount, 0)}</h4>
+            <h4 className="card-statistic">{report.totalsAmount.toLocaleString('en-US')}</h4>
           </TotalsCard>
         ))}
       </TotalsContainer>
@@ -56,15 +58,15 @@ const TotalsContainer = styled.div`
 `;
 
 const TotalsCard = styled.div`
-  background: gainsboro;
+  background: ${lighten(0.1, 'gainsboro')};
   border: 1px solid ${({ theme }) => theme.colors.gray};
   padding: 1rem;
   border-radius: 6px;
 
   .card-title {
     display: inline;
-    color: white;
-    background: ${({ theme }) => theme.colors.orange};
+    color: black;
+    background: ${({ theme }) => theme.colors.silver};
     margin: 0;
     padding: 0.5rem 1rem;
     border-radius: 50px;
@@ -73,18 +75,18 @@ const TotalsCard = styled.div`
   .card-statistic {
     color: ${({ theme }) => theme.colors.dark};
     text-align: right;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 1.5rem 0 0;
     padding-bottom: 1.5rem;
-    border-bottom: 5px solid ${({ theme }) => theme.colors.orange};
+    border-bottom: 5px solid ${({ theme }) => theme.colors.silver};
   }
 `;
 
 const GraphsContainer = styled.div``;
 
 const FAKE_REPORT_TOTALS = [
-  { totalsTitle: 'Total Revenue', totalsAmount: 1000000 },
-  { totalsTitle: 'Yearly Revenue', totalsAmount: 200300 },
-  { totalsTitle: 'AR Outstanding', totalsAmount: 34232 },
-  { totalsTitle: 'Projected Total', totalsAmount: 43729 },
+  { totalsTitle: '#fineart', totalsAmount: 23423 },
+  { totalsTitle: '#jewelry', totalsAmount: 77039 },
+  { totalsTitle: '#rare', totalsAmount: 32378 },
+  { totalsTitle: '#bespoke', totalsAmount: 14738 },
 ];
