@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -7,13 +7,20 @@ import { lighten } from 'polished';
 
 import SiteLayout from 'components/layout/SiteLayout';
 
+const credentials = [
+  { username: 'jacobgci', password: 'GCI1935', name: 'Jacob' },
+  { username: 'cathygci', password: 'GCI1935', name: 'Cathy' },
+];
+
 type FormValues = {
-  email: string;
+  username: string;
   password: string;
 };
 
 export default function TaxidermistLogin() {
   const router = useRouter();
+
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const {
     register,
@@ -22,9 +29,16 @@ export default function TaxidermistLogin() {
   } = useForm<FormValues>();
 
   const onSubmit = (data: FormValues) => {
-    console.log('data', data);
+    const validatedUser = credentials.find((credential) => credential.username === data.username);
 
-    router.push('/jeweler/dashboard');
+    if (validatedUser) {
+      if ((validatedUser.password = data.password)) {
+        setIsInvalid(false);
+        router.push('/jeweler/dashboard');
+      }
+    } else {
+      setIsInvalid(true);
+    }
   };
 
   return (
@@ -40,16 +54,24 @@ export default function TaxidermistLogin() {
             </p>
           </div>
 
+          {isInvalid && (
+            <LoginErrorMessage>
+              Unable to verify username and password. Please try again
+            </LoginErrorMessage>
+          )}
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid-container">
               <div className="input-container">
                 <Input
                   type="text"
                   id="company"
-                  placeholder="Email"
-                  {...register('email', { required: 'This field is required' })}
+                  placeholder="Username"
+                  {...register('username', { required: 'This field is required' })}
                 />
-                {errors.email && <InputErrorMessage>{errors.email.message}</InputErrorMessage>}
+                {errors.username && (
+                  <InputErrorMessage>{errors.username.message}</InputErrorMessage>
+                )}
               </div>
 
               <div className="input-container">
@@ -74,6 +96,13 @@ export default function TaxidermistLogin() {
     </div>
   );
 }
+
+const LoginErrorMessage = styled.p`
+  color: red;
+  font-size: 14px !important;
+  text-align: center;
+  grid-column: 1/-1;
+`;
 
 const InputErrorMessage = styled.p`
   color: ${(props) => props.theme.colors.danger};

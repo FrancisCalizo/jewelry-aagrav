@@ -27,7 +27,7 @@ ChartJS.register(
   Legend
 );
 
-const labels = ['October', 'Novemeber', 'Decemeber'];
+const labels = ['October', 'Novemeber', 'December'];
 
 const cloudData = [
   { value: '#jewelry', count: 10 },
