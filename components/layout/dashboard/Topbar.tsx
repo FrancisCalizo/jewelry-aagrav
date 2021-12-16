@@ -28,7 +28,7 @@ export default function Topbar() {
     <TopbarContainer>
       <div>
         <LogoContainer onClick={() => router.push('/')}>
-          <Image src={`/images/logo-4-white.png`} alt="logo" width={95} height={45} quality={50} />
+          <div style={{ height: 46 }} />
         </LogoContainer>
 
         <MenuContainer>
@@ -42,10 +42,10 @@ export default function Topbar() {
 
       <div className="right-section">
         <div>
-          <span className="user-name">John Stamos</span>
+          <span className="user-name">John Smith</span>
           <p className="user-title">
             {userRole === 'hunter' && <>Hunter</>}
-            {userRole === 'taxidermist' && <>Taxidermist</>}
+            {userRole === 'taxidermist' && <>Jeweler</>}
           </p>
         </div>
 
@@ -84,7 +84,7 @@ const TopbarContainer = styled.div`
     rgba(55, 47, 50, 1) 100%
   );
 
-  border-bottom: 2px solid ${(props) => props.theme.colors.orange};
+  border-bottom: 2px solid ${(props) => props.theme.colors.silver};
   transition: all 500ms ease-in-out;
   display: flex;
   justify-content: space-between;
@@ -108,7 +108,7 @@ const TopbarContainer = styled.div`
     & .user-title {
       margin: 0 0 0 1px;
       font-size: 11px;
-      color: ${({ theme }) => theme.colors.orange};
+      color: ${({ theme }) => theme.colors.silver};
     }
   }
 

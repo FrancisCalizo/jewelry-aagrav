@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 import {
   faClipboardList,
   faCheckDouble,
@@ -15,11 +15,11 @@ import {
 import { getPathName } from 'components/utils';
 
 export const TAXIDERMIST_LINKS = [
-  { title: 'Job Tickets', url: 'job-tickets', icon: faClipboardList },
-  { title: 'Closed Jobs', url: 'closed-jobs', icon: faCheckDouble },
-  { title: 'Leads', url: 'leads', icon: faUsers },
-  { title: 'Jobs Board', url: 'jobs-board', icon: faNetworkWired },
-  { title: 'Reports', url: 'reports', icon: faChartLine },
+  { title: 'Reports', url: 'reports', icon: faClipboardList },
+  // { title: 'Closed Jobs', url: 'closed-jobs', icon: faCheckDouble },
+  // { title: 'Leads', url: 'leads', icon: faUsers },
+  // { title: 'Jobs Board', url: 'jobs-board', icon: faNetworkWired },
+  // { title: 'Reports', url: 'reports', icon: faChartLine },
 ];
 
 export default function Sidebar() {
@@ -96,7 +96,7 @@ const Li = styled.li<{ isCurrent: boolean }>`
   transition: all 0.1s ease-out;
   display: flex;
   align-items: center;
-  background: ${(props) => (props.isCurrent ? props.theme.colors.orange : 'transparent')};
+  background: ${(props) => (props.isCurrent ? lighten(0.4, '#000') : 'transparent')};
   color: ${(props) => (props.isCurrent ? '#fff' : 'inherit')};
 
   & svg {
@@ -105,7 +105,7 @@ const Li = styled.li<{ isCurrent: boolean }>`
   }
 
   &:hover {
-    background: ${(props) => lighten(0.075, props.theme.colors.orange)};
+    background: ${lighten(0.3, '#000')};
     cursor: pointer;
     color: #fff;
 
