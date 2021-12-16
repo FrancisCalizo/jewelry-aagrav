@@ -25,25 +25,31 @@ ChartJS.register(
   Legend
 );
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ['October', 'Novemeber', 'Decemeber'];
 
 export default function Charts() {
   return (
     <MainContainer>
       <div>
-        <h2 className="chart-title">Monthly Revenue</h2>
+        <h2 className="chart-title">Marketing Spend</h2>
         <Bar
           options={{
             responsive: true,
             plugins: { legend: { display: false }, title: { display: false } },
+            scales: {
+              y: {
+                min: 400,
+                max: 600,
+              },
+            },
           }}
           data={{
             labels,
             datasets: [
               {
                 label: 'Dataset 1',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-                backgroundColor: 'rgba(99, 179, 237,0.5)',
+                data: labels.map(() => faker.datatype.number({ min: 400, max: 600 })),
+                backgroundColor: 'rgba(104, 211, 144,0.5)',
               },
             ],
           }}
@@ -51,38 +57,55 @@ export default function Charts() {
       </div>
 
       <div>
-        <h2 className="chart-title">Total Jobs Per Month</h2>
+        <h2 className="chart-title">Total Crawls</h2>
         <Line
           options={{
             responsive: true,
-            plugins: { legend: { display: false }, title: { display: false } },
+            plugins: {
+              legend: {
+                position: 'top' as const,
+              },
+              title: { display: false },
+            },
           }}
           data={{
             labels: labels,
             datasets: [
               {
-                label: 'Dataset 1',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                label: 'Facebook',
+                data: [100, 1000, 1300],
+                borderColor: 'rgba(53, 162, 235, 0.5)',
+                backgroundColor: 'rgba(53, 162, 235, 0.8)',
+              },
+              {
+                label: 'Google',
+                data: [200, 700, 1700],
+                backgroundColor: 'rgba(255,62,48, 0.3)',
+                borderColor: 'rgba(255,62,48, 0.7)',
               },
             ],
           }}
         />
       </div>
       <div>
-        <h2 className="chart-title">New Customers</h2>
+        <h2 className="chart-title">Average Time on Funnel (in seconds)</h2>
         <Bar
           options={{
             responsive: true,
             plugins: { legend: { display: false }, title: { display: false } },
+            scales: {
+              y: {
+                min: 0,
+                max: 60,
+              },
+            },
           }}
           data={{
             labels,
             datasets: [
               {
                 label: 'Dataset 1',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+                data: labels.map(() => faker.datatype.number({ min: 5, max: 60 })),
                 backgroundColor: 'rgb(255,114,33, .5)',
               },
             ],
@@ -91,23 +114,7 @@ export default function Charts() {
       </div>
 
       <div>
-        <h2 className="chart-title">Average Job Duration</h2>
-        <Bar
-          options={{
-            responsive: true,
-            plugins: { legend: { display: false }, title: { display: false } },
-          }}
-          data={{
-            labels,
-            datasets: [
-              {
-                label: 'Dataset 1',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-                backgroundColor: 'rgba(104, 211, 144,0.5)',
-              },
-            ],
-          }}
-        />
+        <h2 className="chart-title">Some MF Cloud here</h2>
       </div>
     </MainContainer>
   );
